@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Logotipo de Family Feet Podólogos">
+	<defs>
+		<!-- Fondo azul del contenedor -->
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#2563a8"/>
+			<stop offset="1" stop-color="#0b1f3a"/>
+		</linearGradient>
+
+		<!-- Degradado del logo interno -->
+		<linearGradient id="gradiente-pie" x1="0%" y1="0%" x2="0%" y2="100%">
+			<stop offset="0%" stop-color="#3cbab6" />
+			<stop offset="100%" stop-color="#0b5466" />
+		</linearGradient>
+
+		<mask id="mascara-manos">
+			<rect width="200" height="200" fill="white" />
+			<g id="mano" fill="black">
+				<path d="M 20,135 Q 50,125 95,135 Q 60,155 20,135 Z" />
+				<path d="M 60,125 Q 85,120 100,125 Q 85,130 65,132 Z" />
+				<path d="M 55,115 Q 80,110 95,115 Q 80,120 60,122 Z" />
+				<path d="M 45,105 Q 70,100 85,105 Q 70,110 50,112 Z" />
+			</g>
+			<use href="#mano" transform="translate(200, 0) scale(-1, 1)" />
+		</mask>
+
+		<g id="pie">
+			<path d="M -5,45 C 15,45 25,5 15,-20 C 5,-50 -20,-50 -25,-20 C -30,10 -20,45 -5,45 Z" />
+			<circle cx="15" cy="-40" r="11" />
+			<circle cx="-5" cy="-52" r="8" />
+			<circle cx="-22" cy="-45" r="6.5" />
+			<circle cx="-35" cy="-33" r="5" />
+			<circle cx="-45" cy="-18" r="4" />
+		</g>
+	</defs>
+
+	<rect width="400" height="400" rx="40" fill="url(#bg)"/>
+	<circle cx="200" cy="200" r="160" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+
+	<!-- Logo centrado y escalado dentro del cuadro -->
+	<svg x="100" y="100" width="200" height="200" viewBox="0 0 200 200">
+		<g mask="url(#mascara-manos)" fill="url(#gradiente-pie)">
+			<use href="#pie" x="80" y="100" transform="rotate(-15 80 100)" />
+			<use href="#pie" x="80" y="100" transform="translate(200, 0) scale(-1, 1) rotate(-15 80 100)" />
+		</g>
+	</svg>
+</svg>
