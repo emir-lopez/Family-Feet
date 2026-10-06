@@ -3,8 +3,8 @@
 Sitio web informativo, responsivo, semántico y accesible para un centro de podología.
 Actividad 2 del Laboratorio de Programación Web (FIME - UANL).
 
-- **Sitio publicado:** https://TU-USUARIO.github.io/family-feet/
-- **Repositorio:** https://github.com/TU-USUARIO/family-feet
+- **Sitio publicado:** https://emir-lopez.github.io/Family-Feet/
+- **Repositorio:** https://github.com/emir-lopez/Family-Feet
 
 ## Objetivo
 
