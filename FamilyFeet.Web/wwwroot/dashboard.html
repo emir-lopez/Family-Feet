@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | Sistema Family Feet</title>
+    <meta name="theme-color" content="#0a3042">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background: var(--teal-50);">
+
+    <!-- Cabecera Privada del Sistema -->
+    <header class="site-header is-scrolled">
+        <div class="container site-header__inner">
+            <a class="brand" href="dashboard.html">
+                <img class="brand__logo" src="assets/img/logo-mark.png" width="48" height="41" alt="Logo">
+                <span class="brand__text"><span class="brand__name">Family<span class="brand__accent">Feet</span></span><small>SISTEMA</small></span>
+            </a>
+            <nav class="site-nav">
+                <ul class="site-nav__list">
+                    <li><a href="#" aria-current="page">Calendario</a></li>
+                    <li><a href="#">Pacientes (CRUD)</a></li>
+                    <li><a href="#">Doctores</a></li>
+                    <li><a class="btn btn--outline btn--sm" href="index.html">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="section" style="padding-top: 2rem;">
+            <div class="container">
+
+                <!-- Bienvenida -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span class="eyebrow">Rol: Administrador</span>
+                        <h2>Bienvenido, Dr. Emir Misael</h2>
+                    </div>
+                    <button class="btn"><span class="icon icon-calendar"></span> Nueva Cita</button>
+                </div>
+
+                <!-- Sección: CALENDARIO -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <h3>Agenda de la Semana</h3>
+                    <p>Visualiza y gestiona las reservas médicas.</p>
+
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Lun 13</div>
+                        <div class="calendar-day-header">Mar 14</div>
+                        <div class="calendar-day-header">Mié 15</div>
+                        <div class="calendar-day-header">Jue 16</div>
+                        <div class="calendar-day-header">Vie 17</div>
+                        <div class="calendar-day-header">Sáb 18</div>
+                        <div class="calendar-day-header">Dom 19</div>
+
+                        <!-- Celdas del calendario -->
+                        <div class="calendar-cell">
+                            <span class="appointment-badge">10:00 - Juan P.</span>
+                            <span class="appointment-badge" style="background: var(--navy-800);">12:30 - María G.</span>
+                        </div>
+                        <div class="calendar-cell is-today">
+                            <strong>Hoy</strong>
+                            <span class="appointment-badge" style="background: #eab308; color: black;">16:00 - Pendiente</span>
+                        </div>
+                        <div class="calendar-cell"></div>
+                        <div class="calendar-cell">
+                            <span class="appointment-badge">09:00 - Carlos M.</span>
+                        </div>
+                        <div class="calendar-cell"></div>
+                        <div class="calendar-cell"></div>
+                        <div class="calendar-cell" style="background: var(--line);">Cerrado</div>
+                    </div>
+                </div>
+
+                <!-- Sección: CRUD DE PACIENTES -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <h3>Gestión de Pacientes (CRUD)</h3>
+                            <p>Altas, bajas, cambios y búsquedas de expedientes.</p>
+                        </div>
+                        <button class="btn btn--outline btn--sm"><span class="icon icon-users"></span> Nuevo Paciente</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del Paciente</th>
+                                    <th>Teléfono</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Los datos se inyectarán aquí mediante JS y el Template -->
+                            </tbody>
+                        </table>
+
+                        <!-- TEMPLATE: Define la estructura de una fila de la tabla sin renderizarse en pantalla -->
+                        <template id="patient-row-template">
+                            <tr>
+                                <td class="col-id"></td>
+                                <td class="col-name"><strong></strong></td>
+                                <td class="col-phone"></td>
+                                <td class="col-date"></td>
+                                <td><span class="status status--active">Activo</span></td>
+                                <td>
+                                    <button class="btn btn--light btn--sm btn-edit" title="Editar">Editar</button>
+                                    <button class="btn btn--ghost btn--sm btn-delete" style="color: red; border-color: red;" title="Eliminar">X</button>
+                                </td>
+                            </tr>
+                        </template>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

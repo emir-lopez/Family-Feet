@@ -1335,6 +1335,167 @@ ol {
   }
 }
 
+/* =========================================
+   ESTILOS DEL SISTEMA
+========================================= */
+/* Tablas (CRUD) */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+    .data-table th,
+    .data-table td {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .data-table th {
+        background: var(--teal-50);
+        font-weight: 700;
+        color: var(--navy-900);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .data-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .data-table tbody tr:hover {
+        background: var(--teal-50);
+    }
+
+/* Badges de estado */
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+.status--active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status--pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* Calendario UI */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--teal-700);
+    padding: 0.5rem;
+}
+
+.calendar-cell {
+    min-height: 100px;
+    padding: 0.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: border-color 0.2s;
+}
+
+    .calendar-cell:hover {
+        border-color: var(--teal-500);
+    }
+
+    .calendar-cell.is-today {
+        background: var(--teal-50);
+        border-color: var(--teal-600);
+    }
+
+.appointment-badge {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--teal-600);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .appointment-badge:hover {
+        background: var(--navy-900);
+    }
+
+/* =========================================
+   NOTIFICACIONES (TOASTS) PERSONALIZADOS
+========================================= */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 250px;
+    max-width: 350px;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-md);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+    pointer-events: auto;
+}
+
+    .toast.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+.toast--success {
+    background-color: var(--teal-600);
+    border-left: 4px solid var(--teal-200);
+}
+
+.toast--error {
+    background-color: #be123c; /* Rojo elegante */
+    border-left: 4px solid #fecdd3;
+}
+
+.toast--info {
+    background-color: var(--navy-800);
+    border-left: 4px solid var(--turq);
+}
+
 /* Accesibilidad: reduce movimiento */
 @media (prefers-reduced-motion: reduce) {
   html {
