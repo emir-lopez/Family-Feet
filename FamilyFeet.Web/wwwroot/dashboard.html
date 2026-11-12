@@ -3,125 +3,319 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard | Sistema Family Feet</title>
+    <title>Panel de gestión | Family Feet</title>
     <meta name="theme-color" content="#0a3042">
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body style="background: var(--teal-50);">
+<body class="app-body">
+    <div class="app">
 
-    <!-- Cabecera Privada del Sistema -->
-    <header class="site-header is-scrolled">
-        <div class="container site-header__inner">
-            <a class="brand" href="dashboard.html">
-                <img class="brand__logo" src="assets/img/logo-mark.png" width="48" height="41" alt="Logo">
-                <span class="brand__text"><span class="brand__name">Family<span class="brand__accent">Feet</span></span><small>SISTEMA</small></span>
+        <!-- ================= BARRA LATERAL ================= -->
+        <aside class="app-sidebar">
+            <a class="app-brand" href="dashboard.html">
+                <img src="assets/img/logo-mark.png" width="40" height="34" alt="">
+                <span class="app-brand__text">
+                    <strong>Family<span>Feet</span></strong>
+                    <small>Sistema de gestión</small>
+                </span>
             </a>
-            <nav class="site-nav">
-                <ul class="site-nav__list">
-                    <li><a href="#" aria-current="page">Calendario</a></li>
-                    <li><a href="#">Pacientes (CRUD)</a></li>
-                    <li><a href="#">Doctores</a></li>
-                    <li><a class="btn btn--outline btn--sm" href="index.html">Cerrar sesión</a></li>
-                </ul>
+
+            <nav class="app-nav" aria-label="Secciones">
+                <button type="button" class="app-nav__item is-active" data-view="agenda">
+                    <span class="ico ico-calendar" aria-hidden="true"></span>Agenda
+                </button>
+                <button type="button" class="app-nav__item" data-view="pacientes">
+                    <span class="ico ico-users" aria-hidden="true"></span>Pacientes
+                </button>
+                <button type="button" class="app-nav__item" data-view="doctores">
+                    <span class="ico ico-pulse" aria-hidden="true"></span>Doctores
+                </button>
             </nav>
-        </div>
-    </header>
 
-    <main id="main">
-        <section class="section" style="padding-top: 2rem;">
-            <div class="container">
+            <div class="app-user">
+                <span class="app-user__avatar" id="user-initials" aria-hidden="true">U</span>
+                <div class="app-user__info">
+                    <strong id="user-name">Usuario</strong>
+                    <small id="user-role">Rol</small>
+                </div>
+                <button type="button" class="app-icon-btn app-icon-btn--light" id="btn-logout" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <span class="ico ico-logout" aria-hidden="true"></span>
+                </button>
+            </div>
+        </aside>
 
-                <!-- Bienvenida -->
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <span class="eyebrow">Rol: Administrador</span>
-                        <h2>Bienvenido, Dr. Emir Misael</h2>
+        <!-- ================= CONTENIDO ================= -->
+        <main class="app-main" id="main">
+
+            <header class="app-topbar">
+                <div>
+                    <h1 id="view-title">Agenda</h1>
+                    <p id="view-subtitle"></p>
+                </div>
+                <button type="button" class="app-btn app-btn--primary" id="btn-primary-action">
+                    <span class="ico ico-plus" aria-hidden="true"></span>
+                    <span id="btn-primary-label">Nueva cita</span>
+                </button>
+            </header>
+
+            <!-- VISTA: AGENDA -->
+            <section class="app-view" id="view-agenda" aria-label="Agenda">
+
+                <div class="app-stats">
+                    <div class="app-stat">
+                        <span class="app-stat__label">Citas del mes</span>
+                        <strong class="app-stat__value" id="stat-month">-</strong>
                     </div>
-                    <button class="btn"><span class="icon icon-calendar"></span> Nueva Cita</button>
+                    <div class="app-stat">
+                        <span class="app-stat__label">Citas pendientes</span>
+                        <strong class="app-stat__value" id="stat-upcoming">-</strong>
+                    </div>
+                    <div class="app-stat" data-roles="doctor patient">
+                        <span class="app-stat__label">Próxima cita</span>
+                        <strong class="app-stat__value app-stat__value--text" id="stat-next">-</strong>
+                    </div>
+                    <div class="app-stat" data-roles="admin">
+                        <span class="app-stat__label">Pacientes activos</span>
+                        <strong class="app-stat__value" id="stat-patients">-</strong>
+                    </div>
+                    <div class="app-stat" data-roles="admin">
+                        <span class="app-stat__label">Doctores activos</span>
+                        <strong class="app-stat__value" id="stat-doctors">-</strong>
+                    </div>
                 </div>
 
-                <!-- Sección: CALENDARIO -->
-                <div class="card" style="margin-bottom: 2rem;">
-                    <h3>Agenda de la Semana</h3>
-                    <p>Visualiza y gestiona las reservas médicas.</p>
+                <div class="agenda-layout">
+                    <section class="app-card" aria-labelledby="calendar-month-label">
+                        <div class="app-card__head">
+                            <h2 id="calendar-month-label">Calendario</h2>
+                            <div class="app-toolbar">
+                                <button type="button" class="app-btn app-btn--secondary app-btn--sm" id="btn-today">Hoy</button>
+                                <div class="app-segment" role="group" aria-label="Cambiar de mes">
+                                    <button type="button" id="btn-prev-month" aria-label="Mes anterior"><span class="ico ico-left" aria-hidden="true"></span></button>
+                                    <button type="button" id="btn-next-month" aria-label="Mes siguiente"><span class="ico ico-right" aria-hidden="true"></span></button>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="calendar-grid">
-                        <div class="calendar-day-header">Lun 13</div>
-                        <div class="calendar-day-header">Mar 14</div>
-                        <div class="calendar-day-header">Mié 15</div>
-                        <div class="calendar-day-header">Jue 16</div>
-                        <div class="calendar-day-header">Vie 17</div>
-                        <div class="calendar-day-header">Sáb 18</div>
-                        <div class="calendar-day-header">Dom 19</div>
+                        <div class="cal">
+                            <div class="cal__weekdays" aria-hidden="true">
+                                <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+                            </div>
+                            <div class="cal__grid" id="calendar-grid"></div>
+                        </div>
+                    </section>
 
-                        <!-- Celdas del calendario -->
-                        <div class="calendar-cell">
-                            <span class="appointment-badge">10:00 - Juan P.</span>
-                            <span class="appointment-badge" style="background: var(--navy-800);">12:30 - María G.</span>
+                    <aside class="app-card" aria-labelledby="month-list-title">
+                        <div class="app-card__head">
+                            <h2 id="month-list-title">Citas del mes</h2>
                         </div>
-                        <div class="calendar-cell is-today">
-                            <strong>Hoy</strong>
-                            <span class="appointment-badge" style="background: #eab308; color: black;">16:00 - Pendiente</span>
-                        </div>
-                        <div class="calendar-cell"></div>
-                        <div class="calendar-cell">
-                            <span class="appointment-badge">09:00 - Carlos M.</span>
-                        </div>
-                        <div class="calendar-cell"></div>
-                        <div class="calendar-cell"></div>
-                        <div class="calendar-cell" style="background: var(--line);">Cerrado</div>
-                    </div>
+                        <ul class="appt-list" id="month-list"></ul>
+                    </aside>
                 </div>
+            </section>
 
-                <!-- Sección: CRUD DE PACIENTES -->
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                        <div>
-                            <h3>Gestión de Pacientes (CRUD)</h3>
-                            <p>Altas, bajas, cambios y búsquedas de expedientes.</p>
+            <!-- VISTA: PACIENTES -->
+            <section class="app-view" id="view-pacientes" aria-label="Pacientes" hidden>
+                <div class="app-card">
+                    <div class="app-card__head">
+                        <div class="app-search">
+                            <span class="ico ico-search" aria-hidden="true"></span>
+                            <input type="search" id="patient-search" placeholder="Buscar por nombre o teléfono" aria-label="Buscar pacientes" autocomplete="off">
                         </div>
-                        <button class="btn btn--outline btn--sm"><span class="icon icon-users"></span> Nuevo Paciente</button>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="data-table">
+                    <div class="app-table-wrap">
+                        <table class="app-table" id="patient-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre del Paciente</th>
-                                    <th>Teléfono</th>
-                                    <th>Fecha de Nacimiento</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Fecha de nacimiento</th>
+                                    <th scope="col" class="col-actions"><span class="sr-only">Acciones</span></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Los datos se inyectarán aquí mediante JS y el Template -->
-                            </tbody>
+                            <tbody></tbody>
                         </table>
-
-                        <!-- TEMPLATE: Define la estructura de una fila de la tabla sin renderizarse en pantalla -->
-                        <template id="patient-row-template">
-                            <tr>
-                                <td class="col-id"></td>
-                                <td class="col-name"><strong></strong></td>
-                                <td class="col-phone"></td>
-                                <td class="col-date"></td>
-                                <td><span class="status status--active">Activo</span></td>
-                                <td>
-                                    <button class="btn btn--light btn--sm btn-edit" title="Editar">Editar</button>
-                                    <button class="btn btn--ghost btn--sm btn-delete" style="color: red; border-color: red;" title="Eliminar">X</button>
-                                </td>
-                            </tr>
-                        </template>
                     </div>
-
+                    <div class="app-pager">
+                        <span id="patient-range"></span>
+                        <div class="app-toolbar">
+                            <button type="button" class="app-btn app-btn--secondary app-btn--sm" id="patient-prev">Anterior</button>
+                            <button type="button" class="app-btn app-btn--secondary app-btn--sm" id="patient-next">Siguiente</button>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
+            <!-- VISTA: DOCTORES -->
+            <section class="app-view" id="view-doctores" aria-label="Doctores" hidden>
+                <div class="app-card">
+                    <div class="app-card__head">
+                        <div class="app-search">
+                            <span class="ico ico-search" aria-hidden="true"></span>
+                            <input type="search" id="doctor-search" placeholder="Buscar por nombre o cédula" aria-label="Buscar doctores" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="app-table-wrap">
+                        <table class="app-table" id="doctor-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Doctor</th>
+                                    <th scope="col">Cédula profesional</th>
+                                    <th scope="col" class="col-actions"><span class="sr-only">Acciones</span></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="app-pager">
+                        <span id="doctor-range"></span>
+                        <div class="app-toolbar">
+                            <button type="button" class="app-btn app-btn--secondary app-btn--sm" id="doctor-prev">Anterior</button>
+                            <button type="button" class="app-btn app-btn--secondary app-btn--sm" id="doctor-next">Siguiente</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= FORMULARIO: CITA ================= -->
+    <dialog class="app-modal" id="dlg-appointment" aria-labelledby="dlg-appointment-title">
+        <form class="app-modal__form" id="form-appointment">
+            <header class="app-modal__head">
+                <h2 id="dlg-appointment-title">Nueva cita</h2>
+                <button type="button" class="app-icon-btn" data-close aria-label="Cerrar"><span class="ico ico-close" aria-hidden="true"></span></button>
+            </header>
+            <div class="app-modal__body app-form">
+                <div class="app-field app-field--full">
+                    <label for="apt-patient">Paciente</label>
+                    <select id="apt-patient" name="idPatient" required></select>
+                </div>
+                <div class="app-field app-field--full">
+                    <label for="apt-doctor">Doctor</label>
+                    <select id="apt-doctor" name="idDoctor" required></select>
+                </div>
+                <div class="app-field">
+                    <label for="apt-date">Fecha</label>
+                    <input type="date" id="apt-date" name="date" required>
+                </div>
+                <div class="app-field">
+                    <label for="apt-time">Hora</label>
+                    <input type="time" id="apt-time" name="time" step="900" required>
+                </div>
+                <div class="app-field app-field--full">
+                    <label for="apt-reason">Motivo de la consulta</label>
+                    <textarea id="apt-reason" name="reason" rows="3" maxlength="1000"></textarea>
+                </div>
             </div>
-        </section>
-    </main>
+            <footer class="app-modal__foot">
+                <button type="button" class="app-btn app-btn--danger-text" id="btn-appointment-delete" hidden>Eliminar cita</button>
+                <span class="spacer"></span>
+                <button type="button" class="app-btn app-btn--secondary" data-close>Cancelar</button>
+                <button type="submit" class="app-btn app-btn--primary">Guardar</button>
+            </footer>
+        </form>
+    </dialog>
 
-    <script src="js/main.js" defer></script>
+    <!-- ================= FORMULARIO: PACIENTE ================= -->
+    <dialog class="app-modal" id="dlg-patient" aria-labelledby="dlg-patient-title">
+        <form class="app-modal__form" id="form-patient">
+            <header class="app-modal__head">
+                <h2 id="dlg-patient-title">Nuevo paciente</h2>
+                <button type="button" class="app-icon-btn" data-close aria-label="Cerrar"><span class="ico ico-close" aria-hidden="true"></span></button>
+            </header>
+            <div class="app-modal__body app-form">
+                <div class="app-field app-field--full" data-create-only>
+                    <label for="pat-email">Correo electrónico</label>
+                    <input type="email" id="pat-email" name="email" required maxlength="100" autocomplete="off">
+                </div>
+                <div class="app-field app-field--full" data-create-only>
+                    <label for="pat-password">Contraseña inicial (mínimo 6 caracteres)</label>
+                    <input type="password" id="pat-password" name="password" required minlength="6" maxlength="100" autocomplete="new-password">
+                </div>
+                <div class="app-field">
+                    <label for="pat-first">Nombre(s)</label>
+                    <input type="text" id="pat-first" name="firstName" required maxlength="100">
+                </div>
+                <div class="app-field">
+                    <label for="pat-last">Apellidos</label>
+                    <input type="text" id="pat-last" name="lastName" required maxlength="100">
+                </div>
+                <div class="app-field">
+                    <label for="pat-phone">Teléfono</label>
+                    <input type="tel" id="pat-phone" name="phone" maxlength="20">
+                </div>
+                <div class="app-field">
+                    <label for="pat-birth">Fecha de nacimiento</label>
+                    <input type="date" id="pat-birth" name="birthDate">
+                </div>
+            </div>
+            <footer class="app-modal__foot">
+                <span class="spacer"></span>
+                <button type="button" class="app-btn app-btn--secondary" data-close>Cancelar</button>
+                <button type="submit" class="app-btn app-btn--primary">Guardar</button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ================= FORMULARIO: DOCTOR ================= -->
+    <dialog class="app-modal" id="dlg-doctor" aria-labelledby="dlg-doctor-title">
+        <form class="app-modal__form" id="form-doctor">
+            <header class="app-modal__head">
+                <h2 id="dlg-doctor-title">Nuevo doctor</h2>
+                <button type="button" class="app-icon-btn" data-close aria-label="Cerrar"><span class="ico ico-close" aria-hidden="true"></span></button>
+            </header>
+            <div class="app-modal__body app-form">
+                <div class="app-field app-field--full" data-create-only>
+                    <label for="doc-email">Correo electrónico</label>
+                    <input type="email" id="doc-email" name="email" required maxlength="100" autocomplete="off">
+                </div>
+                <div class="app-field app-field--full" data-create-only>
+                    <label for="doc-password">Contraseña inicial (mínimo 6 caracteres)</label>
+                    <input type="password" id="doc-password" name="password" required minlength="6" maxlength="100" autocomplete="new-password">
+                </div>
+                <div class="app-field">
+                    <label for="doc-first">Nombre(s)</label>
+                    <input type="text" id="doc-first" name="firstName" required maxlength="100">
+                </div>
+                <div class="app-field">
+                    <label for="doc-last">Apellidos</label>
+                    <input type="text" id="doc-last" name="lastName" required maxlength="100">
+                </div>
+                <div class="app-field app-field--full">
+                    <label for="doc-license">Cédula profesional</label>
+                    <input type="text" id="doc-license" name="licenseNumber" required maxlength="50">
+                </div>
+            </div>
+            <footer class="app-modal__foot">
+                <span class="spacer"></span>
+                <button type="button" class="app-btn app-btn--secondary" data-close>Cancelar</button>
+                <button type="submit" class="app-btn app-btn--primary">Guardar</button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ================= CONFIRMACIÓN ================= -->
+    <dialog class="app-modal app-modal--sm" id="dlg-confirm" aria-labelledby="confirm-title">
+        <div class="app-modal__form">
+            <header class="app-modal__head">
+                <h2 id="confirm-title">Confirmar acción</h2>
+            </header>
+            <div class="app-modal__body">
+                <p id="confirm-message"></p>
+            </div>
+            <footer class="app-modal__foot">
+                <span class="spacer"></span>
+                <button type="button" class="app-btn app-btn--secondary" id="confirm-cancel">Cancelar</button>
+                <button type="button" class="app-btn app-btn--danger" id="confirm-accept">Eliminar</button>
+            </footer>
+        </div>
+    </dialog>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+
+    <script src="js/dashboard.js" defer></script>
 </body>
 </html>
